@@ -2,7 +2,7 @@ import 'package:wanandroidflutter/data/result.dart';
 
 /// Create Time 2020/5/5
 /// @author caow
-class HomeDataPageResult extends Result {
+class HomeDataPageResult {
   int curPage;
   List<HomeData> datas;
   int offset;

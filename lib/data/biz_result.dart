@@ -1,9 +1,9 @@
 
-import 'package:wanandroidflutter/data/result.dart';
+
 
 /// Create Time 2020/4/25
 /// @author caow
-class BizResult<T extends Result> {
+class BizResult<T> {
   T data;
   int errorCode;
   String errorMsg;
@@ -15,13 +15,13 @@ class BizResult<T extends Result> {
     errorMsg = json['errorMsg'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.data != null) {
-      data['data'] = this.data.toJson();
-    }
-    data['errorCode'] = this.errorCode;
-    data['errorMsg'] = this.errorMsg;
-    return data;
-  }
+//  Map<String, dynamic> toJson() {
+//    final Map<String, dynamic> data = new Map<String, dynamic>();
+//    if (this.data != null) {
+//      data['data'] = this.data.toJson();
+//    }
+//    data['errorCode'] = this.errorCode;
+//    data['errorMsg'] = this.errorMsg;
+//    return data;
+//  }
 }

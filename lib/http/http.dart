@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroidflutter/data/biz_result.dart';
+import 'package:wanandroidflutter/data/home_banner_data.dart';
 import 'package:wanandroidflutter/data/home_data_page_result.dart';
 
 class Http {
@@ -155,6 +156,18 @@ class Http {
     BizResult<HomeDataPageResult> result = BizResult.fromJson(response.data);
     HomeDataPageResult pageResult = HomeDataPageResult.fromJson(response.data['data']);
     result.data = pageResult;
+    return result;
+  }
+
+  Future<BizResult<List<HomeBannerData>>> getHomeBannerData() async {
+    Response response = await get('/banner/json');
+    BizResult<List<HomeBannerData>> result = BizResult.fromJson(response.data);
+    List<HomeBannerData> list = List();
+    List<dynamic> datas = response.data['data'];
+    for (var d in datas) {
+      list.add(HomeBannerData.fromJson(d));
+    }
+    result.data = list;
     return result;
   }
 }

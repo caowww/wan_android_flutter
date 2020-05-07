@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:wanandroidflutter/data/home_banner_data.dart';
 import 'package:wanandroidflutter/data/home_data_page_result.dart';
 import 'package:wanandroidflutter/http/http.dart';
 
@@ -14,6 +15,7 @@ class MainPage extends StatefulWidget {
 
 class MainPageState extends State<MainPage> {
   List<HomeData> _list;
+  List<HomeBannerData> _topList;
 
   @override
   void initState() {
@@ -21,6 +23,11 @@ class MainPageState extends State<MainPage> {
     Http().getHomeData(0).then((bizResult) {
       setState(() {
         _list = bizResult.data.datas;
+      });
+    });
+    Http().getHomeBannerData().then((bizResult) {
+      setState(() {
+        _topList = bizResult.data;
       });
     });
   }
@@ -50,9 +57,16 @@ class MainPageState extends State<MainPage> {
     return Container(
       height: 200,
       child: Swiper(
-        itemCount: 8,
+        itemCount: _topList != null ? _topList.length : 0,
+        autoplay: true,
         itemBuilder: (BuildContext context, int index) {
-          return Text('data');
+          var data = _topList[index];
+//          return Text(data.title);
+          return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: NetworkImage(data.imagePath), fit: BoxFit.fill)
+            ),
+          );
         },
       ),
     );
